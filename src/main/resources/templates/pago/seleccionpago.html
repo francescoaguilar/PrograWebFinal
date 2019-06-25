@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Selecciona el metodo de pago</title>
+<meta charset="UTF-8">
+<style>
+.credit-card-div  span { padding-top:10px; }
+.credit-card-div img { padding-top:30px; }
+.credit-card-div .small-font { font-size:9px; }
+.credit-card-div .pad-adjust { padding-top:10px; }
+</style>
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" 
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body th:background="@{/bcpindex/img/fondo.jpg}">
+
+<div class="container" style="height:440px;width:500px;background-color:b2ffff">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BCP.svg/1200px-BCP.svg.png" 
+style="width:480px"></img>
+
+<form th:action="@{/boletas/guardar}" th:object="${boleta}"
+	 method="post" enctype="multipart/form-data">
+
+<div class="panel panel-default" >
+ <div class="panel-heading">
+     <br>
+     <br>
+      <div class="row ">
+              <div class="col-md-12">
+                  <input type="text" th:field="*{nroTarjeta}"
+                  class="form-control" placeholder="1234 5678 9012 3456"
+                  th:errorclass="'form-control alert-danger'" required="required" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"/>
+                 <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('nroTarjeta')}"
+							th:errors="*{nroTarjeta}"></small>
+              </div>
+          </div>
+          <br>
+          
+     <div class="row ">
+              <div class="col-md-5 col-sm-5 col-xs-5">
+                  <span class="help-block text-muted small-font" > Mes/Año de Expiracion</span>
+                  <input type="month" class="form-control" placeholder="MM/AA" 
+                  required="required"/>
+                 </div>
+       
+        <div class="col-md-4 col-sm-4 col-xs-4">
+                  <span class="help-block text-muted small-font" > CVV</span>
+                  <input type="number" class="form-control" placeholder="CCV" required="required" 
+                  min="100" max="999" value="100"/>
+              </div>
+         <div class="col-md-2 col-sm-2 col-xs-2">
+<img th:src="@{/assets/images/icon/visa.png}" style="height:50px;weight:75px" >
+         </div>
+          </div>
+          <br>
+          <br>
+            <div class="row ">
+              <div class="col-md-6">
+                  <input type="number"  class="form-control" placeholder="Cuota a pagar"
+                   th:field="*{vecespagadas}"
+                  th:errorclass="'form-control alert-danger'" required="required" />
+                 <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('vecespagadas')}"
+							th:errors="*{vecespagadas}"></small>
+              </div>
+          </div>
+          <br>
+     <div class="row ">
+              <div class="col-md-12 pad-adjust">
+
+                  <input type="text" class="form-control" placeholder="Nombre en la Tarjeta" 
+                  th:field="*{namePersona}" th:errorclass="'form-control alert-danger'"  required="required"/>
+                  <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('namePersona')}"
+							th:errors="*{namePersona}"></small>
+              </div>
+          </div>
+     <div class="row">
+     
+     <br>
+        
+     
+<div class="col-md-12 pad-adjust">
+    
+</div>
+     </div>
+       <div class="row ">
+            <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                 <a href=/cronogramas/listar  class="btn btn-danger" >Cancelar </a>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                  <input type="submit"  class="btn btn-warning btn-block" value="Registrar" />
+              </div>
+          </div>
+     
+                   </div>
+              </div>
+</form>
+</div>
+</body>
+</HTML>

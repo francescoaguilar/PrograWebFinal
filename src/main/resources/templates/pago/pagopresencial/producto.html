@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Pagos Online</div>
+			<form th:action="@{/evaluaciones/guardar}" th:object="${evaluacion}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idEvaluacion" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idEvaluacion}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idEvaluacion')}"
+							th:errors="*{idEvaluacion}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="cuota" class="col-sm-2 col-form-label">Cuota Inicial</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{cuotaInicial}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('cuotaInicial')}"
+							th:errors="*{cuotaInicial}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="financi" class="col-sm-2 col-form-label">financiamiento</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{financiamiento}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('financiamiento')}"
+							th:errors="*{financiamiento}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="fechaeva" class="col-sm-2 col-form-label">Fecha
+						de Fabricación</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fechaFabricacion}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaFabricacion')}"
+							th:errors="*{fechaFabricacion}"></small>
+					</div>
+				</div>
+
+			<div class="form-group row">
+					<label for="nroCuots" class="col-sm-2 col-form-label">Numero de cuotas</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nroCuotas}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('nroCuotas')}"
+							th:errors="*{nroCuotas}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="categoria" class=" col-sm-2 col-form-label">Categoria:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{categoria.idCategoria}">
+							<option th:each="c: ${listaCategorias}"
+								th:value="${c.idCategoria}" th:text="${c.nombreCategoria}"
+								th:selected="(${c.idCategoria} == *{categoria.idCategoria})"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/evaluaciones/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

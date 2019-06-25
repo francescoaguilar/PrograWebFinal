@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Compra Inteligente BCP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" th:href="@{/assets/images/icon/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/metisMenu.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slicknav.min.css}">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" th:href="@{/assets/css/typography.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/default-css.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+    <!-- modernizr css -->
+    <script src="@{/assets/js/vendor/modernizr-2.8.3.min.js}"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img th:src="@{/assets/images/icon/logo.png}" alt="logo">
+                </div>
+                <br>
+                <h6 class="text-center" style="color: aliceblue"><i class="fa fa-user"></i> <strong>Compra Inteligente BCP</strong></h6>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li class="active"><a th:href="@{/persona/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                            <li>
+                                 <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Cliente</span></a>
+                                <ul class="collapse">
+                                    <li><a href="" th:href="@{/personas//ver/{id}}"><i class="fa fa-user"></i> Datos del Cliente</a></li>
+                                    <li><a href="" th:href="@{/vehiculos/detalle/{id}}"><i class="fa fa-car"></i> Datos del Vehiculo</a></li>
+                                     <li><a href="" th:href="@{/contratos/detalle/{id}}"><i class="fa fa-book"></i> Datos del Contrato</a></li>
+                                    <li><a href="" th:href="@{/cronogramas/listar}"><i class="fa fa-calendar-o"></i> Cronograma de Pagos</a></li>
+                                     <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar</a></li>       
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Evaluador</span></a>
+                                <ul class="collapse">
+                                    <li><a href="" th:href="@{/personas/listar}"><i class="fa fa-users"></i>Lista de Clientes</a></li>
+                                    <li><a href="" th:href="@{/vehiculos/listar}"><i class="fa fa-car"></i> Lista de Vehículos</a></li>
+                                    <li><a href="" th:href="@{/contratos/listar}"><i class="fa fa-book"></i> Lista de Contratos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            <div class="header-area">
+                <div class="row align-items-center">
+                    <!-- nav and search button -->
+                    <div class="col-4 clearfix">
+                        <div class="nav-btn pull-left" style="margin-top: 0px">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <!-- profile info & task notification -->
+                    <div class="col-8 clearfix">
+                        <ul class="notification-area pull-right">
+                            <li>
+                                <a href="">
+                                    Cerrar Sessión
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- header area end -->
+            <div class="main-content-inner">
+				
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Tipo de Persona</div>
+			<form th:action="@{/tipopersonas/guardar}" th:object="${tipopersona}"
+				method="post" >
+				<div class="form-group row">
+					<label for="idTipoPersona" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idTipoPersona}" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombre" class="col-sm-2 col-form-label">Nombre del Tipo de Persona</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombre}" 
+						class="form-control" th:errorclass="'form-control alert-info'" />
+						<small	th:if="${#fields.hasErrors('nombre')}"
+							th:errors="*{nombre}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/tipopersonas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
+			</form>
+		</div>
+	</div>
+				
+            </div>
+        </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Copyright 2018 <a href="https://colorlib.com/wp/">JCode</a>.</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+    <!-- page container area end -->
+    <!-- jquery latest version -->
+    <script th:src="@{/assets/js/vendor/jquery-2.2.4.min.js}"></script>
+    <!-- bootstrap 4 js -->
+    <script th:src="@{/assets/js/popper.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/assets/js/metisMenu.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js}"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js}"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js}"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- all line chart activation -->
+    <script th:src="@{/assets/js/line-chart.js}"></script>
+    <!-- all pie chart -->
+    <script th:src="@{/assets/js/pie-chart.js}"></script>
+    <!-- others plugins -->
+    <script th:src="@{/assets/js/plugins.js}"></script>
+    <script th:src="@{/assets/js/scripts.js}"></script>
+</body>
+
+</html>
