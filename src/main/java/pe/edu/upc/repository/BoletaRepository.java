@@ -8,7 +8,5 @@ import pe.edu.upc.entity.Boleta;
 @Repository
 public interface BoletaRepository  extends JpaRepository<Boleta, Integer>{
 
-	
-
 }
 

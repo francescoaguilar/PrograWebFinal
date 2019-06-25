@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entity.Contrato;
 import pe.edu.upc.service.IContratoService;
@@ -94,7 +95,20 @@ public class ContratoController {
 
 		return "/contrato/contrato";
 	}
-	
+	@RequestMapping("/modificar/{id}")
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+		Optional<Contrato> objPro = cService.listarId(id);
+
+		if (objPro == null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
+			return "redirect:/contratos/listar";
+		} else {
+			model.addAttribute("listaEvaluaciones", eService.listar());
+
+			model.addAttribute("contrato", objPro.get());
+			return "contrato/contrato";
+		}
+	}
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
 		try {
@@ -108,7 +122,7 @@ public class ContratoController {
 			System.out.println(e.getMessage());
 			model.put("mensaje", "No se puede eliminar un contrato");
 		}
-		model.put("listaContratos", cService.listar());
+		model.put("listaEvaluaciones", cService.listar());
 
 		return "redirect:/contratos/listar";
 	}

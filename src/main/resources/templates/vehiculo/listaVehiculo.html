@@ -106,8 +106,20 @@
 		<div align="right">
 			<a th:href="@{/vehiculos/nuevo}" id="add-row" type="button"
 				class="btn btn-danger">Nuevo</a>
-		</div>
+				<form th:action="@{/vehiculos/buscar}" method="post"
+				th:object="${vehiculo}">
+				<div class="form-group">
 
+					<label for="p">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{modelo}" id="p"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-dark">Aceptar</button>
+						<a href="/vehiculos/listar" class="btn btn-warning">Cancelar</a>
+					</div>
+				</div>
+				</form>
+		</div>
+	
 		<div class="card">
 			<div class="card-header text-white bg-dark mb-3">Reporte de
 				Vehiculos</div>
@@ -130,7 +142,10 @@
 						</thead>
 						<tbody id="vehiculo-list">
 							<tr th:each="vehiculo:${listaVehiculos}">
-								<td th:text="${vehiculo.idVehiculo}"></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/vehiculos/ver/} + ${vehiculo.idVehiculo}"
+									th:text="${vehiculo.idVehiculo}"></a></td>
+				
 								<td th:text="${vehiculo.modelo}"></td>
 								<td th:text="${vehiculo.marca}"></td>
 								<td th:text="${vehiculo.placa}"></td>

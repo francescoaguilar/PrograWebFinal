@@ -37,7 +37,7 @@ public class Boleta implements Serializable{
 	@Column(name = "nroTransaccion", nullable = false, length = 45, unique = true)
 	private String nroTransaccion;
 	
-	
+	@Size(min=16, max = 16)
 	@Pattern(regexp = "[0-9]+", message="Solo puede tener números ")
 	@Column(name= "nroTarjeta", nullable= true, length=45)
 	private String nroTarjeta;

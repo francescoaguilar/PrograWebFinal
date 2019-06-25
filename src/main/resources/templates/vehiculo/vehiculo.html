@@ -163,17 +163,6 @@
 				</div>
 				
 				<div class="form-group row">
-					<label for="añofab" class="col-sm-2 col-form-label">año de Fabricacion</label>
-					<div class="col-sm-6">
-						<input type="date" th:field="*{fechaFabricacion}"
-							class="form-control" th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
-							th:if="${#fields.hasErrors('fechaFabricacion')}"
-							th:errors="*{fechaFabricacion}"></small>
-					</div>
-				</div>
-				
-				<div class="form-group row">
 					<label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{proveedor}"
@@ -182,6 +171,15 @@
 							th:if="${#fields.hasErrors('proveedor')}"
 							th:errors="*{proveedor}"></small>
 					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+					<div class="col-sm-6">
+						<input type="file" name="file" class="form-control"
+							th:text="${vehiculo.foto}" required="required" />
+					</div>
+
 				</div>
 				
 				<div class="form-group row">

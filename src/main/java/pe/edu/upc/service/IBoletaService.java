@@ -8,7 +8,8 @@ import pe.edu.upc.entity.Boleta;
 public interface IBoletaService {
 
 public void insertar(Boleta boleta);
-	
+
+public void insertar2(Boleta boleta);
 	public void modificar(Boleta boleta);
 	
 	public void eliminar(int idBoleta);

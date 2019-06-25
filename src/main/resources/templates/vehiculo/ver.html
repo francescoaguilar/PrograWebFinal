@@ -103,95 +103,60 @@
             <!-- header area end -->
             <div class="main-content-inner">
 				<div class="container">
-		<div class="card bg-light">
-			<div class="card-header text-black bg-blue">Registro de
-				Contrato</div>
-			<form th:action="@{/contratos/guardar}" th:object="${contrato}"
-				method="post" enctype="multipart/form-data">
-				
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Vehiculo</div>
+			<div class="card-body">
 
-				<div class="form-group row">
-					<label for="fechacontrato" class="col-sm-2 col-form-label">Fecha del Contrato</label>
-					<div class="col-sm-6">
-						<input type="date" th:field="*{fechaContrato}"
-							class="form-control" placeholder="" th:errorclass="'form-control alert-danger'" required=""/>
-						<small class="form-text text-danger"
-							th:if="${#fields.hasErrors('fechaContrato')}"
-							th:errors="*{fechaContrato}"></small>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="financi" class="col-sm-2 col-form-label">Valor del Vehículo</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{valordelVehiculo}"
-							class="form-control" th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
-							th:if="${#fields.hasErrors('valordelVehiculo')}"
-							th:errors="*{valordelVehiculo}"></small>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="TasaMora" class="col-sm-2 col-form-label">Tasa de la Mora</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{tasaMora}"
-							class="form-control"  th:errorclass="'form-control alert-danger'"
-							required="required" />	<small class="form-text text-danger"
-							th:if="${#fields.hasErrors('tasaMora')}"
-							th:errors="*{tasaMora}"></small>
-					</div>
-				</div>
+				<div class="table-responsive">
+					<table class="table table-white">
 
-			<div class="form-group row">
-					<label for="tasaEfectivaAnual" class="col-sm-2 col-form-label">Tasa Efectiva Anuak</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{TasaEfectivaAnual}"
-							class="form-control" th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
-							th:if="${#fields.hasErrors('TasaEfectivaAnual')}"
-							th:errors="*{tasaEfectivaAnual}"></small>
-					</div>
+						<tbody>
+							<tr>
+								<td>CODIGO</td>
+								<td th:text="${vehiculo.idVehiculo}"></td>
+							</tr>
+							<tr>
+								<td>Modelo</td>
+								<td th:text="${vehiculo.modelo}"></td>
+							</tr>
+							<tr>
+							<tr>
+								<td>Marca</td>
+								<td
+									th:text="${vehiculo.marca}"></td>
+							</tr>
+							<tr>
+								<td>Placa</td>
+								<td th:text="${vehiculo.placa}"></td>
+							</tr>
+							<tr>
+								<td>Color</td>
+								<td th:text="${vehiculo.color}"></td>
+							</tr>
+							<tr>
+								<td>Proveedor</td>
+								<td th:text="${vehiculo.proveedor}"></td>
+							</tr>
+							<tr>
+								<td>Cliente</td>
+								<td th:text="${vehiculo.evaluacion.persona.nombrePersona}"></td>
+							</tr>
+							<tr>
+								<td>FOTO</td>
+								<td><img th:if="${#strings.length(producto.foto)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/productos/uploads/' + ${producto.foto}}"
+									th:alt="${producto.foto}" /></td>
+							</tr>
+					</table>
+					<a th:href="@{/vehiculos/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
 				</div>
-				<div class="form-group row">
-					<label for="tasaSeguroDegravamenl" class="col-sm-2 col-form-label">Tasa de Seguro Degravamen</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{tasaSeguroDegravamen}"
-							class="form-control" th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
-							th:if="${#fields.hasErrors('tasaSeguroDegravamen')}"
-							th:errors="*{tasaSeguroDegravamen}"></small>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="tasaSeguroVehi" class="col-sm-2 col-form-label">Tasa de Seguro Vehicular</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{tasaSeguroVehicular}"
-							class="form-control"  th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
-							th:if="${#fields.hasErrors('tasaSeguroVehicular')}"
-							th:errors="*{tasaSeguroVehicular}"></small>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="persona" class=" col-sm-2 col-form-label">Persona:</label>
-					<div class="col-sm-6">
-						<select class="form-control" th:field="*{evaluacion.idEvaluacion}">
-							<option th:each="c: ${listaEvaluaciones}"
-								th:value="${c.idEvaluacion}" th:text="${c.persona.nombrePersona}"
-								th:selected="(${c.idEvaluacion} == *{evaluacion.idEvaluacion})"></option>
-						</select>
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<div class="col-sm-6" align="center">
-						<input type="submit" value="Registrar" class="btn btn-primary" />
-
-						<a href="/contratos/listar" class="btn btn-danger">Cancelar</a>
-					</div>
-				</div>
-
-				<p th:text="${mensaje}" class="form-text text-danger"></p>
-			</form>
+			</div>
 		</div>
 	</div>
             </div>

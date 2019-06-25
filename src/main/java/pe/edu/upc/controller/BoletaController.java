@@ -29,9 +29,9 @@ public class BoletaController {
 	@Autowired
 	private IContratoService cService;
 	
-	@GetMapping("/tabla")
+	@GetMapping("/retornar")
 	public String index(Model model){
-	return "index/tabla";
+	return "pago/bienvenido";
 	}
 	
 	@GetMapping("/nuevo")
@@ -39,6 +39,14 @@ public class BoletaController {
 		model.addAttribute("boleta", new Boleta());
 		model.addAttribute("listaContratos", cService.listar());
 		return "pago/seleccionpago";
+	}
+	
+	
+	@GetMapping("/nuevo2")
+	public String nuevoBoleta2(Model model){
+		model.addAttribute("boleta", new Boleta());
+		model.addAttribute("listaContratos", cService.listar());
+		return "pago/paymentselector";
 	}
 	
 	@PostMapping("/guardar")
@@ -55,8 +63,26 @@ public class BoletaController {
 			status.setComplete();
 		
 		model.addAttribute("listaBoletas", cService.listar());
-		return "/boleta/listaBoleta";
+		return "/pago/exitoso";
 	}
+	
+	@PostMapping("/guardar2")
+	public String guardarBoleta2(@Valid Boleta boleta, BindingResult result , Model model,
+			SessionStatus status) throws Exception{
+		if(result.hasErrors()) {
+			model.addAttribute("listaContratos", cService.listar());
+			return "pago/paymentselector";
+		} else {
+			}
+			
+			bService.insertar2(boleta);
+			model.addAttribute("mensaje","Se guardó correctamente");
+			status.setComplete();
+		
+		model.addAttribute("listaBoletas", cService.listar());
+		return "/pago/exitoso2";
+	}
+	
 	
 	@GetMapping("/listar")
 	public String listarBoletas(Model model) {

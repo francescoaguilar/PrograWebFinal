@@ -1,7 +1,6 @@
 package pe.edu.upc.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "vehiculos")
@@ -48,18 +41,11 @@ public class Vehiculo implements Serializable{
 	@Column(name="color",nullable=false,length=45)
 	private String color;
 	
-	@NotNull
-	@Past(message = "La fecha debe estar en el pasado")
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "fechaFabricacion")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaFabricacion;
-	
-	
 	@NotEmpty(message="Ingrese el proveedor")
 	@Column(name="proveedor",nullable=false,length=45)
 	private String proveedor;
 
+	private String foto;
 	@ManyToOne
 	@JoinColumn(name = "idEvaluacion")
 	private Evaluacion evaluacion;
@@ -71,18 +57,22 @@ public class Vehiculo implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vehiculo(int idVehiculo, String modelo, String marca, String placa, String color, Date fechaFabricacion,
-		String proveedor,Evaluacion evaluacion) {
+
+	public Vehiculo(int idVehiculo, @NotEmpty(message = "Ingrese el modelo") String modelo,
+			@NotEmpty(message = "Ingrese la marca") String marca, @NotEmpty(message = "Ingrese la placa") String placa,
+			@NotEmpty(message = "Ingrese el color") String color,
+			@NotEmpty(message = "Ingrese el proveedor") String proveedor, String foto, Evaluacion evaluacion) {
 		super();
 		this.idVehiculo = idVehiculo;
 		this.modelo = modelo;
 		this.marca = marca;
 		this.placa = placa;
 		this.color = color;
-		this.fechaFabricacion = fechaFabricacion;
 		this.proveedor = proveedor;
-		this.evaluacion= evaluacion;
+		this.foto = foto;
+		this.evaluacion = evaluacion;
 	}
+
 
 	public Evaluacion getEvaluacion() {
 		return evaluacion;
@@ -131,14 +121,6 @@ public class Vehiculo implements Serializable{
 		this.color = color;
 	}
 
-	public Date getfechaFabricacion() {
-		return fechaFabricacion;
-	}
-
-	public void setfechaFabricacion(Date fechaFabricacion) {
-		this.fechaFabricacion = fechaFabricacion;
-	}
-
 	
 	public String getProveedor() {
 		return proveedor;
@@ -172,5 +154,13 @@ public class Vehiculo implements Serializable{
 		if (idVehiculo != other.idVehiculo)
 			return false;
 		return true;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 }

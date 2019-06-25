@@ -74,7 +74,31 @@ public class BoletaServiceImpl implements IBoletaService{
 		return bR.findById(idBoleta);
 	}
 
-
-
+	@Override
+	public void insertar2(Boleta boleta) {
+		String NTransac="";
+		Random rnd = new Random();
+		boolean a = false;
+		for(int i = 0; i< 10 ; i++)
+		{
+			if(i<5)
+			{
+				NTransac += (char)(rnd.nextInt(25) + 65);
+						
+			}
+			else
+			{
+				NTransac += rnd.nextInt(10);
+			}
+		}
+		Date fechaBoleta = new Date();
+	
+		boleta.setFechaPago(fechaBoleta);
+		boleta.setEstado(a);
+		boleta.setMonto(cR.findAll().get(boleta.getVecespagadas()).getCuota());
+		boleta.setNroTransaccion(NTransac);
+		bR.save(boleta);
+		
+	}
 	
 }
