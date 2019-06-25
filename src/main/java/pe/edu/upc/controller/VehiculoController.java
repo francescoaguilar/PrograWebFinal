@@ -46,7 +46,7 @@ public class VehiculoController {
 	
 	@RequestMapping("/bienvenido")
 	public String irBienvenido(Model model) {
-		return "bienvenido";
+		return "index/tabla";
 	}
 
 	@GetMapping("/nuevo")
@@ -93,7 +93,7 @@ public class VehiculoController {
 		}
 		model.addAttribute("listaVehiculos", vService.listar());
 
-		return "/vehiculo/listaVehiculos";
+		return "/vehiculo/listaVehiculo";
 
 	}
 

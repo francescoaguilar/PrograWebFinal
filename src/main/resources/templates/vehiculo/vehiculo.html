@@ -49,16 +49,17 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active"><a th:href="@{/persona/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                            <li class="active"><a th:href="@{/personas/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
                             <li>
                                  <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Cliente</span></a>
-                                <ul class="collapse">
+                               <ul class="collapse">
                                     <li><a href="" th:href="@{/personas//ver/{id}}"><i class="fa fa-user"></i> Datos del Cliente</a></li>
                                     <li><a href="" th:href="@{/vehiculos/detalle/{id}}"><i class="fa fa-car"></i> Datos del Vehiculo</a></li>
                                      <li><a href="" th:href="@{/contratos/detalle/{id}}"><i class="fa fa-book"></i> Datos del Contrato</a></li>
                                     <li><a href="" th:href="@{/cronogramas/listar}"><i class="fa fa-calendar-o"></i> Cronograma de Pagos</a></li>
-                                     <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar</a></li>       
-                                </ul>
+                                <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar Online</a></li>    
+                                     <li><a href="" th:href="@{/boletas/nuevo2}"><i class="fa fa-university"></i> Pagar en el Banco</a></li>   
+                                  </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Evaluador</span></a>
@@ -66,6 +67,8 @@
                                     <li><a href="" th:href="@{/personas/listar}"><i class="fa fa-users"></i>Lista de Clientes</a></li>
                                     <li><a href="" th:href="@{/vehiculos/listar}"><i class="fa fa-car"></i> Lista de Vehículos</a></li>
                                     <li><a href="" th:href="@{/contratos/listar}"><i class="fa fa-book"></i> Lista de Contratos</a></li>
+                                    <li><a href="" th:href="@{/evaluaciones/listar}"><i class="fa fa-book"></i> Lista de Evaluaciones</a></li>
+                                    
                                 </ul>
                             </li>
                         </ul>
@@ -109,22 +112,12 @@
 			<form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}"
 				method="post" enctype="multipart/form-data">
 				
-				<div class="form-group row">
-					<label for="idVehiculo" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{idVehiculo}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
-							class="form-text text-danger"
-							th:if="${#fields.hasErrors('idVehiculo')}"
-							th:errors="*{idVehiculo}"></small>
-					</div>
-				</div>
 				
 				<div class="form-group row">
 					<label for="modelo" class="col-sm-2 col-form-label">Modelo</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{modelo}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'" required="required"/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('modelo')}"
 							th:errors="*{modelo}"></small>
@@ -133,9 +126,9 @@
 				<div class="form-group row">
 					<label for="marca" class="col-sm-2 col-form-label">Marca</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{marca}"
+						<input type="text" th:field="*{marca}" required="required"
 							class="form-control" th:errorclass="'form-control alert-danger'"
-							required="required" /> <small class="form-text text-danger"
+						/> <small class="form-text text-danger"
 							th:if="${#fields.hasErrors('marca')}"
 							th:errors="*{marca}"></small>
 					</div>

@@ -30,6 +30,7 @@ public class Persona {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPersona;
 	
+	@Pattern(regexp = "[a-zA-Z]+", message="Solo puede tener letras")
 	@NotNull(message="ingrese el nombre de la persona")
 	@Column(name = "nombrePersona", length = 45)
 	private String nombrePersona;
@@ -40,6 +41,7 @@ public class Persona {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private	Date fechaNacimiento;
 	
+	@Pattern(regexp = "[0-9]+", message="Solo puede tener números ")
 	@NotEmpty(message="Ingrese el DNI")
 	@Column(name = "dniPersona", nullable = false, length = 45, unique = true)
 	private String dniPersona;
@@ -49,7 +51,7 @@ public class Persona {
 	private String direccionPersona;
 	
 	@Digits(fraction = 9, integer = 9)
-	@Column(name = "telefonoPersona", nullable = true, length = 8)
+	@Column(name = "telefonoPersona", nullable = true, length = 9)
 	private int telefonoPersona;
 	
 	@Email(message= "ingrese un correo valido")

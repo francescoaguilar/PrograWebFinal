@@ -40,32 +40,35 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a th:href="index.html"><img src="@{/assets/images/icon/logo.png}" alt="logo"></a>
+                      <img th:src="@{/assets/images/icon/logo.png}" alt="logo">
                 </div>
                 <br>
-                <h6 class="text-center" style="color: aliceblue"><i class="fa fa-user"></i> <strong>JCode</strong></h6>
+                 <h6 class="text-center" style="color: aliceblue"><i class="fa fa-user"></i> <strong>Compra Inteligente BCP</strong></h6>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active"><a th:href="@{/persona/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                            <li class="active"><a th:href="@{/personas/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
                             <li>
                                  <a href="javascript:void(0)"><i class="fa fa-tag"></i><span>Cliente</span></a>
                                 <ul class="collapse">
                                     <li><a href="" th:href="@{/personas//ver/{id}}"><i class="fa fa-user"></i> Datos del Cliente</a></li>
-                                    <li><a href="" th:href="@{/vehiculos/detalle/{id}}"><i class="fa fa-vehicule"></i> Datos del Vehiculo</a></li>
-                                     <li><a href="" th:href="@{/contratos/detalle/{id}}"><i class="fa fa-handshake-o"></i> Datos del Contrato</a></li>
-                                    <li><a href="" th:href="@{/cronogramas/cronograma}"><i class="fa fa-calendar-o"></i> Cronograma de Pagos</a></li>
-                                     <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar</a></li>       
-                                </ul>
+                                    <li><a href="" th:href="@{/vehiculos/detalle/{id}}"><i class="fa fa-car"></i> Datos del Vehiculo</a></li>
+                                     <li><a href="" th:href="@{/contratos/detalle/{id}}"><i class="fa fa-book"></i> Datos del Contrato</a></li>
+                                    <li><a href="" th:href="@{/cronogramas/listar}"><i class="fa fa-calendar-o"></i> Cronograma de Pagos</a></li>
+                                <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar Online</a></li>    
+                                     <li><a href="" th:href="@{/boletas/nuevo2}"><i class="fa fa-university"></i> Pagar en el Banco</a></li>   
+                                  </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0)"><i class="fa fa-tag"></i><span>Evaluador</span></a>
+                                <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Evaluador</span></a>
                                 <ul class="collapse">
                                     <li><a href="" th:href="@{/personas/listar}"><i class="fa fa-users"></i>Lista de Clientes</a></li>
-                                    <li><a href="" th:href="@{/vehiculos/listar}"><i class="fa fa-vehicule"></i> Lista de Vehículos</a></li>
-                                    <li><a href="" th:href="@{/contratos/listar}"><i class="fa fa-handshake-o"></i> Lista de Contratos</a></li>
+                                    <li><a href="" th:href="@{/vehiculos/listar}"><i class="fa fa-car"></i> Lista de Vehículos</a></li>
+                                    <li><a href="" th:href="@{/contratos/listar}"><i class="fa fa-book"></i> Lista de Contratos</a></li>
+                                    <li><a href="" th:href="@{/evaluaciones/listar}"><i class="fa fa-book"></i> Lista de Evaluaciones</a></li>
+                                    
                                 </ul>
                             </li>
                         </ul>

@@ -49,16 +49,17 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active"><a th:href="@{/persona/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                            <li class="active"><a th:href="@{/personas/bienvenido}"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
                             <li>
                                  <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Cliente</span></a>
-                                <ul class="collapse">
+                              <ul class="collapse">
                                     <li><a href="" th:href="@{/personas//ver/{id}}"><i class="fa fa-user"></i> Datos del Cliente</a></li>
                                     <li><a href="" th:href="@{/vehiculos/detalle/{id}}"><i class="fa fa-car"></i> Datos del Vehiculo</a></li>
                                      <li><a href="" th:href="@{/contratos/detalle/{id}}"><i class="fa fa-book"></i> Datos del Contrato</a></li>
                                     <li><a href="" th:href="@{/cronogramas/listar}"><i class="fa fa-calendar-o"></i> Cronograma de Pagos</a></li>
-                                     <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar</a></li>       
-                                </ul>
+                                <li><a href="" th:href="@{/boletas/nuevo}"><i class="fa fa-shopping-cart"></i> Pagar Online</a></li>    
+                                     <li><a href="" th:href="@{/boletas/nuevo2}"><i class="fa fa-university"></i> Pagar en el Banco</a></li>   
+                                  </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Evaluador</span></a>
@@ -66,6 +67,8 @@
                                     <li><a href="" th:href="@{/personas/listar}"><i class="fa fa-users"></i>Lista de Clientes</a></li>
                                     <li><a href="" th:href="@{/vehiculos/listar}"><i class="fa fa-car"></i> Lista de Vehículos</a></li>
                                     <li><a href="" th:href="@{/contratos/listar}"><i class="fa fa-book"></i> Lista de Contratos</a></li>
+                                    <li><a href="" th:href="@{/evaluaciones/listar}"><i class="fa fa-book"></i> Lista de Evaluaciones</a></li>
+                                 
                                 </ul>
                             </li>
                         </ul>
@@ -109,21 +112,10 @@
 			<form th:action="@{/personas/guardar}" th:object="${persona}"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group row">
-					<label for="idPersona" class="col-sm-2 col-form-label">Id</label>
-					<div class="col-sm-6">
-						<input type="text" th:field="*{idPersona}" class="form-control"
-							th:errorclass="'form-control alert-danger'" /> <small
-							class="form-text text-danger"
-							th:if="${#fields.hasErrors('idPersona')}"
-							th:errors="*{idPersona}"></small>
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="persona" class="col-sm-2 col-form-label">Persona</label>
+					<label for="persona" class="col-sm-2 col-form-label">Nombre</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{nombrePersona}"
-							class="form-control" th:errorclass="'form-control alert-danger'" 
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"
 							/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('nombrePersona')}"
@@ -136,8 +128,8 @@
 						de Nacimiento</label>
 					<div class="col-sm-6">
 						<input type="date" th:field="*{fechaNacimiento}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
-						<small class="form-text text-danger"
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"/>
+						<small class="form-text text-danger" 
 							th:if="${#fields.hasErrors('fechaNacimiento')}"
 							th:errors="*{fechaNacimiento}"></small>
 					</div>
@@ -147,7 +139,7 @@
 					<label for="dir" class="col-sm-2 col-form-label">Dni</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{dniPersona}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('dniPersona')}"
 							th:errors="*{dniPersona}"></small>
@@ -158,7 +150,7 @@
 					<label for="dire" class="col-sm-2 col-form-label">Direccion</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{direccionPersona}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('direccionPersona')}"
 							th:errors="*{direccionPersona}"></small>
@@ -169,7 +161,7 @@
 					<label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{telefonoPersona}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('telefonoPersona')}"
 							th:errors="*{telefonoPersona}"></small>
@@ -180,7 +172,7 @@
 					<label for="correo" class="col-sm-2 col-form-label">Email</label>
 					<div class="col-sm-6">
 						<input type="text" th:field="*{emailPersona}"
-							class="form-control" th:errorclass="'form-control alert-danger'" />
+							class="form-control" th:errorclass="'form-control alert-danger'"  required="required"/>
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('emailPersona')}"
 							th:errors="*{emailPersona}"></small>

@@ -71,7 +71,10 @@ public class CronogramaRepository {
 		double amortizacion = CalcAmortizacion(
 				Ci(FinancC, CalcInteresMensual(tea, tiempo, Saldoini) / Saldoini, ncuotas),
 				CalcInteresMensual(tea, tiempo, FinancC));
-		while (i < ncuotas) {
+		Cronograma mes1 = new Cronograma();
+		mes1.setSaldo(Math.round(Saldoini * 100.0) / 100.0);
+		l.add(mes1);
+		while (i <= ncuotas) {
 			Cronograma e = new Cronograma();
 
 			Calendar calendar = Calendar.getInstance();
@@ -89,37 +92,41 @@ public class CronogramaRepository {
 			int dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);
 			tiempo=dias;
 			
-			e.setIdCronograma(i);			
+			
+			if (i == 0) {
+			e.setIdCronograma(i+1);			
 			e.setSeguroDegrav(Math.round(CalcSegurDegravamen(tasa_degrav, tiempo, Saldoini) * 100.0) / 100.0);
 			e.setSeguroVeh(Math.round(CalcSegurVehicular(tasa_veh, tiempo, valor_venta) * 100.0) / 100.0);
 			e.setInteres(Math.round(CalcInteresMensual(tea, tiempo, Saldoini) * 100.0) / 100.0);
 			e.setEnvio(10);
-			e.setSaldo(Math.round(Saldoini * 100.0) / 100.0);
-			if (i == 0) {
 				e.setAmortizacion(Math.round(amortizacion * 100.0) / 100.0);
+				e.setSaldo(Math.round((Saldoini-e.getAmortizacion()) * 100.0) / 100.0);
+				Saldoini=e.getSaldo();
 				e.setCuota(
 						e.getInteres() + e.getSeguroDegrav() + e.getSeguroVeh() + e.getAmortizacion() + e.getEnvio());
 				cuotaFija = e.getCuota();
 			} else {
-				if (i == ncuotas - 1) {
-					e.setCuota(Math.round(cuotaFinal * 100.0) / 100.0);
-					amortizacion = cuotaFinal
-							- (e.getInteres() + e.getSeguroDegrav() + e.getSeguroVeh() + e.getEnvio());
-					e.setAmortizacion(Math.round(amortizacion * 100.0) / 100.0);
-				} else {
+				e.setIdCronograma(i+1);			
+				e.setSeguroDegrav(Math.round(CalcSegurDegravamen(tasa_degrav, tiempo, Saldoini) * 100.0) / 100.0);
+				e.setSeguroVeh(Math.round(CalcSegurVehicular(tasa_veh, tiempo, valor_venta) * 100.0) / 100.0);
+				e.setInteres(Math.round(CalcInteresMensual(tea, tiempo, Saldoini) * 100.0) / 100.0);
+				e.setEnvio(10);
+				if (i != ncuotas ) {
 					e.setCuota(Math.round(cuotaFija * 100.0) / 100.0);
 					amortizacion = cuotaFija - (e.getInteres() + e.getSeguroDegrav() + e.getSeguroVeh() + e.getEnvio());
 					e.setAmortizacion(Math.round(amortizacion * 100.0) / 100.0);
+					e.setSaldo(Math.round((Saldoini-e.getAmortizacion()) * 100.0) / 100.0);
+					Saldoini=e.getSaldo();
+				} else {
+					e.setCuota(Math.round(cuotaFinal * 100.0) / 100.0);
+					amortizacion = cuotaFinal- (e.getInteres() + e.getSeguroDegrav() + e.getSeguroVeh() + e.getEnvio());
+					e.setAmortizacion(Math.round(amortizacion * 100.0) / 100.0);
+					e.setSaldo(Math.round((Saldoini-e.getAmortizacion()) * 100.0) / 100.0);
+					Saldoini=e.getSaldo();
 				}
 			}
 			l.add(e);
-
-			Saldoini -= e.getAmortizacion();
-			if (i == ncuotas - 1)
-				e.setSaldo(Math.round(Saldoini * 100.0) / 100.0);
-
 			i++;
-
 		}
 		return l;
 	}

@@ -31,7 +31,7 @@ public class BoletaController {
 	
 	@GetMapping("/retornar")
 	public String index(Model model){
-	return "pago/bienvenido";
+		return "index/tabla";
 	}
 	
 	@GetMapping("/nuevo")
@@ -93,7 +93,7 @@ public class BoletaController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/boleta/listaBoletas";
+		return "/index/tabla";
 	}
 	
 	@GetMapping("/detalle/{id}")

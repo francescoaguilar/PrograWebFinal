@@ -34,7 +34,7 @@ public class PersonaController {
 
 	@GetMapping("/bienvenido")
 	public String bienvenido(Model model) {
-		return "bienvenido";
+		return "index/tabla";
 	}
 
 	@GetMapping("/nuevo")

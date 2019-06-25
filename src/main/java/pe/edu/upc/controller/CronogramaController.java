@@ -16,7 +16,7 @@ public class CronogramaController {
 
 	@RequestMapping("/bienvenido")
 	public String irBienvenido() {
-		return "bienvenido";
+		return "index/tabla";
 	}
 	
 	@GetMapping("/nuevo")

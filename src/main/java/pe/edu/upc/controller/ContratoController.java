@@ -38,7 +38,7 @@ public class ContratoController {
 	@GetMapping("/bienvenido")
 	public String bienvenido(Model model)
 	{
-		return "bienvenido";
+		return "index/tabla";
 	}
 	
 	@GetMapping("/nuevo")
